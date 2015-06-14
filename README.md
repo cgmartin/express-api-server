@@ -4,7 +4,7 @@ An opinionated Web API server library using Express, Node.js, and REST best prac
 
 [![Build Status](https://travis-ci.org/cgmartin/express-api-server.svg?branch=master)](https://travis-ci.org/cgmartin/express-api-server)
 [![Dependency Status](https://david-dm.org/cgmartin/express-api-server.svg)](https://david-dm.org/cgmartin/express-api-server)
-[![devDependency Status](https://david-dm.org/cgmartin/express-api-server/dev-status.svg)](https://david-dm.org/cgmartin/express-api-server#info=devDependencies)
+[![npm version](https://badge.fury.io/js/express-api-server.svg)](http://badge.fury.io/js/express-api-server)
 
 ## Synopsis
 
