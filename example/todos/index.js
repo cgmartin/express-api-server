@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * Example express router for "todo" resources
+ */
 var express = require('express');
 var jsonParser = require('body-parser').json();
 var expressApiServer = require('../../src'); // require('express-api-server');
