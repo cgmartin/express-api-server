@@ -92,7 +92,7 @@ See [example/server.js](example/server.js) for a runnable example.
 
 ### Default Environment Variables
 
-* `API_WEBROOT` : Path to the web root directory.
+* `API_WEBROOT` : A base URL path prefix, i.e. "/api"
 * `API_COMPRESSION` : Enables gzip compression when set to "1".
 * `API_GRACEFUL_SHUTDOWN` : Wait for connections to close before stopping server when set to "1".
 * `API_SESSION_MAXAGE` : The time in ms until the session ID cookie should expire (default: 2 hours). This is just a tracking cookie, no session storage is used here.
