@@ -10,6 +10,7 @@ var logger = require('../middleware/request-logger');
 var errorHandler = require('../middleware/error-handler');
 var prettyPrint = require('../middleware/pretty-print');
 var compression = require('compression');
+var methodOverride = require('method-override');
 var errors = require('./errors');
 
 module.exports = function createApp(appInitCb, options) {
@@ -46,6 +47,9 @@ module.exports = function createApp(appInitCb, options) {
 
     // Convenient pretty json printing via `?pretty=true`
     app.use(prettyPrint(app));
+
+    // Allow clients without PUT or DELETE verb support to override POST method
+    app.use(methodOverride(options.methodOverrideHeader));
 
     // Userland callback
     appInitCb(app, options);

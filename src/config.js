@@ -15,6 +15,9 @@ module.exports = {
         threshold: 4000
     },
 
+    // https://github.com/expressjs/method-override
+    methodOverrideHeader: 'X-HTTP-Method-Override',
+
     // Enable this if behind a secure reverse proxy, like heroku
     isBehindProxy: (process.env.API_REV_PROXY === '1'),
 
