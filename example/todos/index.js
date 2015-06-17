@@ -16,7 +16,7 @@ var router = module.exports = express.Router();
 
 //
 // Route Definitions
-//
+// -----------------------------------------------------------------
 
 router.all('*', requireAuthentication); // authenticate all methods
 
@@ -33,7 +33,7 @@ router.route('/todos/:todo_id')
 
 //
 // Route Actions
-//
+// -----------------------------------------------------------------
 
 function requireAuthentication(req, res, next) {
     // Unauthorized example:

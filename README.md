@@ -86,7 +86,7 @@ $ API_COMPRESSION=1 API_SSL=1 API_PORT=4443 node server.js
 
 See [src/config.js](src/config.js) for a full list of the available configuration options.
 
-See [src/lib/errors.js](src/lib/errors.js) for several built-in Error sub-types appropriate for API scenarios.
+See [src/lib/errors.js](src/lib/errors.js) for built-in Error sub-types appropriate for API/HTTP scenarios.
 
 See [example/server.js](example/server.js) for a runnable example.
 
@@ -161,6 +161,7 @@ The functionality has been implemented by integrating the following 3rd-party to
 ## REST API Resources
 
 * <http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api>
+* <http://www.troyhunt.com/2014/02/your-api-versioning-is-wrong-which-is.html>
 
 ## License
 

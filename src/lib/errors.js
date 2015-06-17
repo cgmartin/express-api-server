@@ -1,22 +1,23 @@
 'use strict';
 
 var assert = require('assert');
+var http = require('http');
 var util = require('util');
 
 var errors = module.exports;
 
 /**
- * All API Errors extend from this object
+ * All HTTP Errors will extend from this object
  */
-function ApiError(message, options) {
+function HttpError(message, options) {
     // handle constructor call without 'new'
-    if (!(this instanceof ApiError)) {
-        return new ApiError(message, options);
+    if (!(this instanceof HttpError)) {
+        return new HttpError(message, options);
     }
 
-    ApiError.super_.call(this);
+    HttpError.super_.call(this);
     Error.captureStackTrace(this, this.constructor);
-    this.name = 'ApiError';
+    this.name = 'HttpError';
     this.message = message;
     this.statusCode = 500;
 
@@ -25,13 +26,13 @@ function ApiError(message, options) {
     if (options.errors)     { this.errors = options.errors; }
     if (options.headers)    { this.headers = options.headers; }
 }
-util.inherits(ApiError, Error);
+util.inherits(HttpError, Error);
 
 /**
  * Helper method to add a WWW-Authenticate header
  * https://tools.ietf.org/html/rfc6750#section-3
  */
-ApiError.prototype.authBearerHeader = function(realm, error, description) {
+HttpError.prototype.authBearerHeader = function(realm, error, description) {
     if (!this.headers) {
         this.headers = {};
     }
@@ -51,7 +52,7 @@ ApiError.prototype.authBearerHeader = function(realm, error, description) {
 /**
  * Creates a custom API Error sub type
  */
-ApiError.extend = function(subTypeName, errorCode, defaultMessage) {
+HttpError.extend = function(subTypeName, errorCode, defaultMessage) {
     assert(subTypeName, 'subTypeName is required');
 
     var SubTypeError = function(message, options) {
@@ -64,7 +65,7 @@ ApiError.extend = function(subTypeName, errorCode, defaultMessage) {
         Error.captureStackTrace(this, this.constructor);
 
         this.name = subTypeName;
-        this.statusCode = errorCode;
+        this.statusCode = parseInt(errorCode || 500, 10);
         this.message = message || defaultMessage;
     };
 
@@ -75,26 +76,35 @@ ApiError.extend = function(subTypeName, errorCode, defaultMessage) {
     return SubTypeError;
 };
 
-errors.ApiError = ApiError;
+errors.HttpError = HttpError;
 
-// The request is malformed, such as if the body does not parse or is missing
-errors.BadRequestError = ApiError.extend('BadRequest', 400, 'Bad request');
+// Create an error type for each of the 400/500 status codes
+var httpCodes = Object.keys(http.STATUS_CODES);
+httpCodes.forEach(function(code) {
+    if (code < 400) { return; }
 
-// When no or invalid authentication details are provided.
-errors.UnauthorizedError = ApiError.extend('UnauthorizedError', 401, 'Unauthorized');
+    var name = getErrorNameFromCode(code);
+    errors[name] = HttpError.extend(name, code, http.STATUS_CODES[code]);
+});
 
-// When authentication succeeded but authenticated user doesn't have access to the resource
-errors.ForbiddenError = ApiError.extend('ForbiddenError', 403, 'Forbidden');
+/**
+ * Convert status description to error name
+ */
+function getErrorNameFromCode(code) {
+    code = parseInt(code, 10);
+    var status = http.STATUS_CODES[code];
+    if (!status) { return false; }
 
-// When a non-existent resource is requested
-errors.NotFoundError = ApiError.extend('NotFoundError', 404, 'Not found');
+    var name = '';
+    var words = status.split(/\s+/);
+    words.forEach(function(w) {
+        name += w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+    });
 
-// When an HTTP method is being requested that isn't allowed for the authenticated user
-errors.MethodNotAllowedError = ApiError.extend('MethodNotAllowedError', 405, 'Method not allowed');
+    name = name.replace(/\W+/g, '');
 
-// Indicates that the resource at this end point is no longer available.
-// Useful as a blanket response for old API versions
-errors.GoneError = ApiError.extend('GoneError', 410, 'End point is no longer available');
-
-// Used for validation errors
-errors.UnprocessableEntityError = ApiError.extend('UnprocessableEntityError', 422, 'Entity validation error');
+    if (!/\w+Error$/.test(name)) {
+        name += 'Error';
+    }
+    return name;
+}
