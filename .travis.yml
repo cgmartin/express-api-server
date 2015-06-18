@@ -3,10 +3,4 @@ node_js:
 - '0.10'
 - '0.12'
 - iojs
-deploy:
-  provider: npm
-  email: cgmartin@gmail.com
-  on:
-    tags: true
-  api_key:
-    secure: AvoH9Hj48G2hAZZ1NCgpHR/aCNLDEiYXLsQlXrAS83E6F0EfDoeETGc4HBL7/JQme8GkMGqin18ClU1JDtpgaISaVG3n522Fy/L3yGbl2t7vIfUIjMQ6np6OHuh+7Rj6FwT2LbwqiIawx5jXISsKvjvihSfvoCwe+6y06szcNi9QZXX0+rRnyfzNtcOyaF7m0R28NipaUnPgUxPS5zNJ0jw+76F7LCa/2raHpmy5mdQ7ySRre1YrnFdhMhOdvmCgnap8p+wfv6CuG6vNXHVGFToCkP7259Fj/u1Y7eic46Leh1mbcwm/HmQElqPjLrKDVIcRlHNrBe+34NyvEuhx56IBc82RH5YhvtCOKPp5PjZQIlaTNuGNjHoQ4J8qRiuSnZlCevUOP28Vh8CoyFqsbM+m771sNauQGMV9gGNyuJnmj5E70uYTr6R48BHgEhS5TNbya5l4G8/0AWMHrpuNOPTfhY6fWH8LhJV7oyV1q6nteo3K62X5vuPGFdUKYiIZLIFyluTmcnA9fKtzidl8bCQPf562WWEZjZY68WuLxuYGDQRn5bMLNihEsCdwrJZItvtvsidEcw47kKnKTeOyai4UkE812GuYbHJ3ZaQptKqfyGKv7pYQZdPbEIjQhcQmlbcNmcNiVuOjkLC5HZRab+ZF8dT/dUvez6DDhosU4h8=
+
