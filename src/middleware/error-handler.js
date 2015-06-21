@@ -6,11 +6,6 @@ var errors = require('../lib/errors');
  * Express route error handler: send back JSON error responses
  */
 module.exports = function errorHandler(err, req, res, next) {
-    // Only log unexpected errors
-    if (!(err instanceof errors.HttpError)) {
-        req.log.error(err, 'error');
-    }
-
     // Set optional headers
     if (err.headers) {
         res.set(err.headers);

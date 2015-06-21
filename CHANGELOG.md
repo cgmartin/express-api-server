@@ -1,3 +1,8 @@
+0.0.6 / 2015-06-21
+==================
+
+- update: Improve error handling of uncaught exceptions during a request. Now uses a domain to catch, log the error, and send a response before rethrowing to the graceful shutdown handler (if enabled).
+
 0.0.5 / 2015-06-20
 ==================
 

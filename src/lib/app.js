@@ -11,6 +11,7 @@ var errorHandler = require('../middleware/error-handler');
 var prettyPrint = require('../middleware/pretty-print');
 var compression = require('compression');
 var methodOverride = require('method-override');
+var domainErrors = require('../middleware/domain-errors');
 var errors = require('./errors');
 
 module.exports = function createApp(appInitCb, options) {
@@ -20,6 +21,9 @@ module.exports = function createApp(appInitCb, options) {
         // http://expressjs.com/api.html#trust.proxy.options.table
         app.enable('trust proxy');
     }
+
+    // Unhandled exception domain handler
+    app.use(domainErrors);
 
     // Logging requests
     app.use(logger({logger: options.logger}));

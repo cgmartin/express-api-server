@@ -10,7 +10,8 @@ var apiOptions = {
     baseUrlPath: '/api',
     sslKeyFile:  path.join(__dirname, '/keys/60638403-localhost.key'),
     sslCertFile: path.join(__dirname, '/keys/60638403-localhost.cert'),
-    cors: {}
+    cors: {},
+    isGracefulShutdownEnabled: false
 };
 
 var initApiRoutes = function(app, options) {
