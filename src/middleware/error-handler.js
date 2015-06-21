@@ -20,10 +20,10 @@ module.exports = function errorHandler(err, req, res, next) {
         message: err.message  // Description of error
     };
 
-    var status = err.statusCode || 500;
+    var status = err.status || 500;
 
     // Unique application error code
-    response.code = err.appCode || status;
+    response.code = err.code || status;
 
     // Additional field error messages
     if (err.errors) { response.errors = err.errors; }

@@ -1,7 +1,12 @@
+0.0.5 / 2015-06-20
+==================
+
+- fix: Error type has incorrect app/custom code property name. Changed HttpError `appCode`/`customCode` to `code`, and `statusCode` to `status`
+
 0.0.4 / 2015-06-18
 ==================
 
-- fix: republish due to NPM registry checksum issue
+- fix: Republish due to NPM registry checksum issue
 
 0.0.3 / 2015-06-16
 ==================

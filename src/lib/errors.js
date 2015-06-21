@@ -19,10 +19,10 @@ function HttpError(message, options) {
     Error.captureStackTrace(this, this.constructor);
     this.name = 'HttpError';
     this.message = message;
-    this.statusCode = 500;
+    this.status = 500;
 
     options = options || {};
-    if (options.customCode) { this.customCode = options.customCode; }
+    if (options.code)       { this.code = options.code; }
     if (options.errors)     { this.errors = options.errors; }
     if (options.headers)    { this.headers = options.headers; }
 }
@@ -52,7 +52,7 @@ HttpError.prototype.authBearerHeader = function(realm, error, description) {
 /**
  * Creates a custom API Error sub type
  */
-HttpError.extend = function(subTypeName, errorCode, defaultMessage) {
+HttpError.extend = function(subTypeName, statusCode, defaultMessage) {
     assert(subTypeName, 'subTypeName is required');
 
     var SubTypeError = function(message, options) {
@@ -65,7 +65,7 @@ HttpError.extend = function(subTypeName, errorCode, defaultMessage) {
         Error.captureStackTrace(this, this.constructor);
 
         this.name = subTypeName;
-        this.statusCode = parseInt(errorCode || 500, 10);
+        this.status = parseInt(statusCode || 500, 10);
         this.message = message || defaultMessage;
     };
 
@@ -80,19 +80,19 @@ errors.HttpError = HttpError;
 
 // Create an error type for each of the 400/500 status codes
 var httpCodes = Object.keys(http.STATUS_CODES);
-httpCodes.forEach(function(code) {
-    if (code < 400) { return; }
+httpCodes.forEach(function(statusCode) {
+    if (statusCode < 400) { return; }
 
-    var name = getErrorNameFromCode(code);
-    errors[name] = HttpError.extend(name, code, http.STATUS_CODES[code]);
+    var name = getErrorNameFromStatusCode(statusCode);
+    errors[name] = HttpError.extend(name, statusCode, http.STATUS_CODES[statusCode]);
 });
 
 /**
  * Convert status description to error name
  */
-function getErrorNameFromCode(code) {
-    code = parseInt(code, 10);
-    var status = http.STATUS_CODES[code];
+function getErrorNameFromStatusCode(statusCode) {
+    statusCode = parseInt(statusCode, 10);
+    var status = http.STATUS_CODES[statusCode];
     if (!status) { return false; }
 
     var name = '';

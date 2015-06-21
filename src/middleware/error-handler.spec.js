@@ -63,7 +63,7 @@ describe('Error Handler', function() {
     });
 
     it('should set status and app codes', function() {
-        var err = {message: 'ERROR_MESSAGE', statusCode: 404, appCode: 1337};
+        var err = {message: 'ERROR_MESSAGE', status: 404, code: 1337};
         var req = {log: {error: sinon.spy()}};
         var res = {
             set: sinon.spy(),
