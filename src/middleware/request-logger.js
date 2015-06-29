@@ -32,7 +32,7 @@ module.exports = function requestLogger(options) {
 function createLogMeta(req, res, startTime) {
     return {
         method: req.method,
-        url: req.url,
+        url: req.originalUrl,
         httpVersion: getHttpVersion(req),
         statusCode: res.statusCode,
         contentLength: res['content-length'],

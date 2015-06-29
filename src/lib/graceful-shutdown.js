@@ -22,11 +22,10 @@ module.exports = function gracefulShutdown(server) {
                 process.exit(retCode);
             });
 
-            var killTimer = setTimeout(function() {
+            setTimeout(function() {
                 console.error('Could not close out connections in time, force shutdown');
                 process.exit(retCode);
-            }, 10 * 1000);
-            killTimer.unref();
+            }, 10 * 1000).unref();
 
         } else {
             console.debug('Http server is not running. Exiting');
