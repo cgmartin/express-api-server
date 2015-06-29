@@ -1,3 +1,9 @@
+0.0.7 / 2015-06-28
+==================
+
+- fix: Request logs are not reporting the correct (full) url path
+
+
 0.0.6 / 2015-06-21
 ==================
 
