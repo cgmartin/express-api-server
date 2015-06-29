@@ -4,7 +4,7 @@ var mockery = require('mockery');
 var expect  = require('chai').expect;
 var sinon   = require('sinon');
 
-describe('Enforce SSL', function() {
+describe('Request Logger', function() {
     var moduleUnderTest = './request-logger';
     var module;
     var loggerStub;
@@ -49,7 +49,7 @@ describe('Enforce SSL', function() {
         var middleware = module(options);
         var req = {
             method: 'METHOD',
-            url: 'URL',
+            originalUrl: 'URL',
             httpVersionMajor: 'MAJ',
             httpVersionMinor: 'MIN',
             headers: {
