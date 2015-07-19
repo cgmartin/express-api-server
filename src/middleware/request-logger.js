@@ -22,6 +22,7 @@ module.exports = function requestLogger(options) {
         });
 
         res.on('finish', function responseSent() {
+            if (req.skipRequestLog) { return; }
             req.log.info(createLogMeta(req, res, startTime), 'request');
         });
 

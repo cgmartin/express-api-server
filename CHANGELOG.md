@@ -1,3 +1,8 @@
+0.0.8 / 2015-07-19
+==================
+
+- update: Allow request logging to be skipped via request flag: `req.skipRequestLog`.
+
 0.0.7 / 2015-06-28
 ==================
 
