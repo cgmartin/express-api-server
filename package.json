@@ -1,6 +1,6 @@
 {
   "name": "express-api-server",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "An opinionated Express Web API server library",
   "main": "src/index.js",
   "scripts": {
